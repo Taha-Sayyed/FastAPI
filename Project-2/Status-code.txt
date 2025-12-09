@@ -7,3 +7,28 @@
 4xx -> Client Error: An error was caused by the Client
 
 5xx -> Server Error: An error occurred on the Server
+
+
+------------------------------------------------------------
+
+Detail for 2xx: Successful status code
+
+200: OK  -> Commonly used for successful GET request when data is being returned
+
+201: Created -> Used when a POST creates an entity/ The request has been successful creating a new resource
+
+204: No content -> Commonly used with PUT requests. The requets has been successful, did not create an entity nor return anything
+
+
+------------------------------------------------------------
+
+Detail for 4xx: Client Error status code
+
+400: Bad Request -> Commonly used for invalid request methods. Cannot process the request due to client error
+
+401: Unauthorised -> Client does not have valid authentication for target resource
+
+404: Not Found -> The client requested resource can not be Found
+
+422: Unprocessable entity -> Semantic Error in client request
+
