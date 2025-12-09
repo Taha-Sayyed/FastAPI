@@ -94,14 +94,14 @@ def update_book(book:BookRequest):
             BOOKS[i]=book
 
 @app.delete("/books/{book_id}")
-def delete_book(book_id:int):
+def delete_book(book_id:int=Path(gt=0)):
     for i in range(len(BOOKS)):
         if BOOKS[i].id==book_id:
             BOOKS.pop(i)
             break
 
 @app.get("/books/publish_date/{published_date}")
-def get_book_by_publishDate(published_date:int):
+def get_book_by_publishDate(published_date:int=Path(gt=0)):
     for i in range(len(BOOKS)):
         if BOOKS[i].published_date==published_date:
             return BOOKS[i]
