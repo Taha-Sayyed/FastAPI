@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 from pydantic import BaseModel,Field
 
 app=FastAPI()
@@ -73,8 +73,9 @@ def create_book(book_request:BookRequest): #FastAPI will show BookRequest schema
     BOOKS.append(find_book_id(new_book))
     
 
+#added Path parameter validation
 @app.get("/books/{book_id}")
-def get_book_by_id(book_id:int):
+def get_book_by_id(book_id:int=Path(gt=0)):
     for book in BOOKS:
         if book.id==book_id:
             return book
@@ -100,7 +101,7 @@ def delete_book(book_id:int):
             break
 
 @app.get("/books/publish_date/{published_date}")
-def get_book_publishDate(published_date:int):
+def get_book_by_publishDate(published_date:int):
     for i in range(len(BOOKS)):
         if BOOKS[i].published_date==published_date:
             return BOOKS[i]
