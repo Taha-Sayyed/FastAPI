@@ -98,3 +98,9 @@ def delete_book(book_id:int):
         if BOOKS[i].id==book_id:
             BOOKS.pop(i)
             break
+
+@app.get("/books/publish_date/{published_date}")
+def get_book_publishDate(published_date:int):
+    for i in range(len(BOOKS)):
+        if BOOKS[i].published_date==published_date:
+            return BOOKS[i]
