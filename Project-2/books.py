@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Path, Query, HTTPException
 from pydantic import BaseModel,Field
-from starlette import status
+from starlette import status #For Explicit status code Response
+
 
 app=FastAPI()
 
@@ -63,11 +64,11 @@ def find_book_id(book:Book):
     return book
 
 
-@app.get("/books")
+@app.get("/books",status_code=status.HTTP_200_OK)
 def get_book():
     return BOOKS
 
-@app.post("/create-book")
+@app.post("/create-book",status_code=status.HTTP_201_CREATED)
 def create_book(book_request:BookRequest): #FastAPI will show BookRequest schema (example/model) in the API docs
     new_book=Book(**book_request.model_dump()) # Convert BookRequest model into a Book model
     # **operator pass the key-value pair from the BodyRequest() into the Book() constructor
@@ -75,7 +76,7 @@ def create_book(book_request:BookRequest): #FastAPI will show BookRequest schema
     
 
 #added Path parameter validation
-@app.get("/books/{book_id}")
+@app.get("/books/{book_id}",status_code=status.HTTP_200_OK)
 def get_book_by_id(book_id:int=Path(gt=0)):
     for book in BOOKS:
         if book.id==book_id:
@@ -89,7 +90,7 @@ def get_book_by_rating(book_rating:int):
         if book.rating==book_rating:
             return book
         
-@app.put("/books/update_book")
+@app.put("/books/update_book",status_code=status.HTTP_204_NO_CONTENT)
 def update_book(book:BookRequest):
     book_changed=False
     for i in range(len(BOOKS)):
@@ -100,7 +101,7 @@ def update_book(book:BookRequest):
         raise HTTPException(status_code=404,detail="Items not found")
         
 
-@app.delete("/books/{book_id}")
+@app.delete("/books/{book_id}",status_code=status.HTTP_204_NO_CONTENT)
 def delete_book(book_id:int=Path(gt=0)):
     book_retrieve_to_delete=False
     for i in range(len(BOOKS)):
