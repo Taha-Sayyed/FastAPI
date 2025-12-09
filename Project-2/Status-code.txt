@@ -1,0 +1,9 @@
+1xx -> Information response: Request processing
+
+2xx -> Success: request Successfully complete
+
+3xx -> Redirection: Further action must be complete
+
+4xx -> Client Error: An error was caused by the Client
+
+5xx -> Server Error: An error occurred on the Server
