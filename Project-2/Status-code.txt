@@ -32,3 +32,12 @@ Detail for 4xx: Client Error status code
 
 422: Unprocessable entity -> Semantic Error in client request
 
+------------------------------------------------------------
+
+Detail for 5xx
+
+500: Internal server error ->  When an unexpected issue on the server happend
+
+------------------------------------------------------------
+
+HTTP Exception is something that we have to raise within our method, which will cancel the functionality
